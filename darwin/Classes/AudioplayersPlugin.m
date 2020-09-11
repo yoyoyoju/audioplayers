@@ -160,6 +160,8 @@ const NSString *_defaultPlayingRoute = @"speakers";
                         result(0);
                     if (call.arguments[@"volume"] == nil)
                         result(0);
+                    if (call.arguments[@"playbackRate"] == nil)
+                        result(0);
                     if (call.arguments[@"position"] == nil)
                         result(0);
                     if (call.arguments[@"respectSilence"] == nil)
@@ -168,14 +170,16 @@ const NSString *_defaultPlayingRoute = @"speakers";
                         result(0);
                     int isLocal = [call.arguments[@"isLocal"]intValue] ;
                     float volume = (float)[call.arguments[@"volume"] doubleValue] ;
+                    float playbackRate = (float)[call.arguments[@"playbackRate"] doubleValue] ;
                     int milliseconds = call.arguments[@"position"] == [NSNull null] ? 0.0 : [call.arguments[@"position"] intValue] ;
                     bool respectSilence = [call.arguments[@"respectSilence"] boolValue];
                     bool recordingActive = [call.arguments[@"recordingActive"] boolValue];
                     CMTime time = CMTimeMakeWithSeconds(milliseconds / 1000,NSEC_PER_SEC);
                     NSLog(@"isLocal: %d %@", isLocal, call.arguments[@"isLocal"] );
                     NSLog(@"volume: %f %@", volume, call.arguments[@"volume"] );
+                    NSLog(@"playbackRate: %f %@", playbackRate, call.arguments[@"playbackRate"] );
                     NSLog(@"position: %d %@", milliseconds, call.arguments[@"positions"] );
-                    [self play:playerId url:url isLocal:isLocal volume:volume time:time isNotification:respectSilence recordingActive:recordingActive];
+                    [self play:playerId url:url isLocal:isLocal volume:volume setPlaybackRate:playbackRate time:time isNotification:respectSilence recordingActive:recordingActive];
                   },
                 @"pause":
                   ^{

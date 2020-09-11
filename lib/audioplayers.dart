@@ -380,6 +380,7 @@ class AudioPlayer {
     String url, {
     bool isLocal,
     double volume = 1.0,
+    double playbackRate = 1.0,
     // position must be null by default to be compatible with radio streams
     Duration position,
     bool respectSilence = false,
@@ -399,6 +400,7 @@ class AudioPlayer {
       'respectSilence': respectSilence ?? false,
       'stayAwake': stayAwake ?? false,
       'recordingActive': recordingActive ?? false,
+      'playbackRate': playbackRate,
     });
 
     if (result == 1) {

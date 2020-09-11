@@ -72,12 +72,14 @@ public class AudioplayersPlugin implements MethodCallHandler, FlutterPlugin {
             case "play": {
                 final String url = call.argument("url");
                 final double volume = call.argument("volume");
+                final double rate = call.argument("playbacRate");
                 final Integer position = call.argument("position");
                 final boolean respectSilence = call.argument("respectSilence");
                 final boolean isLocal = call.argument("isLocal");
                 final boolean stayAwake = call.argument("stayAwake");
                 player.configAttributes(respectSilence, stayAwake, context.getApplicationContext());
                 player.setVolume(volume);
+                player.setRate(rate);
                 player.setUrl(url, isLocal, context.getApplicationContext());
                 if (position != null && !mode.equals("PlayerMode.LOW_LATENCY")) {
                     player.seek(position);
